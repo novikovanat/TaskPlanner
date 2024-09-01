@@ -1,5 +1,5 @@
 import Button from '../Button/Button';
-import { addTask } from '../redux/tasks/tasksSlice.js';
+import {postTask} from '../redux/tasks/tasksOperations.js';
 import css from './TaskForm.module.css';
 import { useDispatch } from 'react-redux';
 
@@ -8,7 +8,7 @@ const TaskForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
-    dispatch(addTask(form.elements.text.value))
+    dispatch(postTask(form.elements.text.value))
     form.reset();
   };
 
