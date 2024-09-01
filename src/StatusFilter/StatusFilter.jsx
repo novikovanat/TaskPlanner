@@ -1,5 +1,5 @@
 import Button from "../Button/Button";
-import { setStatusFilter } from "../redux/actions";
+import { setStatusFilter } from "../redux/filters/filtersSlice.js";
 import { statusFilters } from "../redux/constants";
 import { selectFilterStatus } from "../redux/selectors";
 import css from "./StatusFilter.module.css";
