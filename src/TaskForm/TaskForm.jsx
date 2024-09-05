@@ -3,11 +3,12 @@ import {postTask} from '../redux/tasks/tasksOperations.js';
 import css from './TaskForm.module.css';
 import { useDispatch } from 'react-redux';
 
-const TaskForm = () => {
+export default function TaskForm(){
   const dispatch = useDispatch()
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
+    console.log(form.elements.text.value)
     dispatch(postTask(form.elements.text.value))
     form.reset();
   };
@@ -24,4 +25,3 @@ const TaskForm = () => {
     </form>
   );
 };
-export default TaskForm
