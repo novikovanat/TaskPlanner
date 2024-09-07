@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = "https://62584f320c918296a49543e7.mockapi.io/tasks";
+axios.defaults.baseURL = "https://66d429855b34bcb9ab3dd0fc.mockapi.io/tasks";
 
 export const fetchTasks = createAsyncThunk(
   "tasks/fetchAll",
@@ -44,7 +44,9 @@ export const toggle = createAsyncThunk(
   "tasks/toggle",
   async (task, thunkAPI) => {
     try {
-      const response = await axios.put(`/${task.id}`, { completed: !task.completed });
+      const response = await axios.put(`/${task.id}`, {
+        completed: !task.completed,
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -1,11 +1,11 @@
-import { tempTasks } from "../redux/constants";
+
 import { selectTasks } from "../redux/selectors";
 import css from "./TaskCounter.module.css";
 import { useSelector } from "react-redux";
 
 const TaskCounter = () => {
-  // const tasks = useSelector(selectTasks);
-  const countedTasks = tempTasks.reduce(
+  const tasks = useSelector(selectTasks);
+  const countedTasks = tasks.reduce(
     (accumulator, task) => {
       if (task.completed) {
         accumulator.completed += 1;
