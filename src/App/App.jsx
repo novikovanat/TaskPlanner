@@ -2,19 +2,17 @@ import Layout from "../Layout/Layout";
 import AppBar from "../AppBar/AppBar";
 import TaskForm from "../TaskForm/TaskForm";
 import TaskList from "../TaskList/TaskList";
-import { useEffect } from "react";
-import { selectTasks } from "../redux/selectors.js";
-import { fetchTasks } from "../redux/tasks/tasksOperations.js";
-import { useSelector, useDispatch } from "react-redux";
 import ErrorBoundary from "../CatchError/CatchError.jsx";
-export default function App() {
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchTasks } from "../redux/operations.js";
 
-  const dispatch = useDispatch;
-  const { isLoading, error, items } = useSelector(selectTasks);
+ function App() {
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchTasks);
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }), [dispatch];
 
   return (
     <Layout>
@@ -25,11 +23,13 @@ export default function App() {
         <TaskForm />
       </ErrorBoundary>
 
-      {isLoading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      <p>Loading...</p>
+
       <ErrorBoundary fallback={"smth wrong in TaskList"}>
-        {items.length > 0 && <TaskList />}
+        <TaskList />
       </ErrorBoundary>
     </Layout>
   );
 }
+
+export default App;
