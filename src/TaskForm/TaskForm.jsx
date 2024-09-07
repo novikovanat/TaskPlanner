@@ -8,7 +8,7 @@ export default function TaskForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const taskText = event.target.elements.text.value;
-    console.log(dispatch(postTask(taskText)));
+    dispatch(postTask(taskText));
     event.target.reset();
   };
 

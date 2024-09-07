@@ -11,6 +11,7 @@ const tasksSlice = createSlice({
     builder
       .addCase(fetchTasks.pending, (state) => {
         state.isLoading = true;
+        state.error = null;
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -27,6 +28,7 @@ const tasksSlice = createSlice({
       .addCase(postTask.fulfilled, (state, action) => {
         state.isLoading = false;
         state.items.push(action.payload);
+
         state.error = null;
       })
       .addCase(postTask.rejected, (state, action) => {
@@ -39,9 +41,11 @@ const tasksSlice = createSlice({
       .addCase(deleteTask.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        return (state.items = state.items.filer(
-          (item) => item.id !== action.payload.id
-        ));
+
+        const index = state.items.findIndex((item) => {
+          item.id === action.payload.id;
+        });
+        state.items.splice(index, 1);
       })
       .addCase(deleteTask.rejected, (state, action) => {
         state.isLoading = false;
@@ -51,7 +55,7 @@ const tasksSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(toggle.fulfilled, (state, action) => {
-        const index = state.item.findIndex((item) => {
+        const index = state.items.findIndex((item) => {
           item.id === action.payload.id;
         });
         state.items.splise(index, 1, action.payload);
