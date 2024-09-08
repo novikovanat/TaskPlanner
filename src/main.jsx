@@ -9,7 +9,7 @@ import store from "./redux/store";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <ErrorBoundary fallback={"smth wrong in app"}>
+      <ErrorBoundary fallback={'App temporary lost in a void. Have a nice day'}>
         <App />
       </ErrorBoundary>
     </Provider>

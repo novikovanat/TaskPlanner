@@ -55,11 +55,14 @@ const tasksSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(toggle.fulfilled, (state, action) => {
-        const index = state.items.findIndex((item) => {
-          item.id === action.payload.id;
-        });
-        state.items.splise(index, 1, action.payload);
+        state.isLoading = false;
+        state.error = null;
+        const index = state.items.findIndex(
+          (task) => task.id === action.payload.id
+        );
+        state.items.splice(index, 1, action.payload);
       })
+
       .addCase(toggle.rejected, (state, action) => {
         state.error = action.payload;
         state.isLoading = false;
