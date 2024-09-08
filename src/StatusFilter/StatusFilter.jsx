@@ -8,9 +8,9 @@ import { useSelector, useDispatch } from "react-redux";
 const StatusFilter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilterStatus);
+
   const handlefilterChange = (filter) => {
-    console.log(filter)
-    // dispatch(setStatusFilter(filter));
+    dispatch(setStatusFilter(filter));
   };
   return (
     <div className={css.wrapper}>
@@ -27,7 +27,7 @@ const StatusFilter = () => {
         Active
       </Button>
       <Button
-        selected={filter === statusFilters.complited}
+        selected={filter === statusFilters.completed}
         onClick={() => handlefilterChange(statusFilters.completed)}
       >
         Completed
