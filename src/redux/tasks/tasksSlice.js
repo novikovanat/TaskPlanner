@@ -29,7 +29,7 @@ const tasksSlice = createSlice({
         state.isLoading = false;
         state.items.push(action.payload);
 
-        state.error = null;
+        
       })
       .addCase(postTask.rejected, (state, action) => {
         state.isLoading = false;
@@ -37,11 +37,11 @@ const tasksSlice = createSlice({
       })
       .addCase(deleteTask.pending, (state) => {
         state.isLoading = true;
+        state.error = null;
       })
       .addCase(deleteTask.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-
         const index = state.items.findIndex((item) => {
           item.id === action.payload.id;
         });
