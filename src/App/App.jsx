@@ -4,32 +4,36 @@ import TaskForm from "../TaskForm/TaskForm";
 import TaskList from "../TaskList/TaskList";
 import ErrorBoundary from "../CatchError/CatchError.jsx";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchTasks } from "../redux/operations.js";
+import { selectError, selectLoadingStatus } from "../redux/selectors.js";
 
- function App() {
+const App = () => {
   const dispatch = useDispatch();
+  const error = useSelector(selectError);
+  const isLoading = useSelector(selectLoadingStatus);
 
   useEffect(() => {
     dispatch(fetchTasks());
-  }), [dispatch];
+  }),
+    [dispatch];
 
   return (
     <Layout>
-      <ErrorBoundary fallback={"smth wrong in AppBar"}>
+      <ErrorBoundary
+        fallback={"AppBar temporary lost in a void. Have a nice day"}
+      >
         <AppBar />
       </ErrorBoundary>
-      <ErrorBoundary fallback={"smth wrong in TaskForm"}>
+      <ErrorBoundary fallback={"Here must be TaskForm"}>
         <TaskForm />
       </ErrorBoundary>
-
-      <p>Loading...</p>
-
-      <ErrorBoundary fallback={"smth wrong in TaskList"}>
-        <TaskList />
+      <ErrorBoundary fallback={"Here must be TaskList"}>
+        {error && <p>{error}</p>}
+        {isLoading ? <p>Loading...</p> : <TaskList />}
       </ErrorBoundary>
     </Layout>
   );
-}
+};
 
 export default App;
